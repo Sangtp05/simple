@@ -15,9 +15,16 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
+
+        $this->call([
+            CategorySeeder::class,      // Chạy đầu tiên vì Product cần category_id
+            ProductSeeder::class,       // Chạy thứ hai vì ProductAttribute và ProductImage cần product_id
+            ProductAttributeSeeder::class,
+            ProductImageSeeder::class
         ]);
     }
 }
