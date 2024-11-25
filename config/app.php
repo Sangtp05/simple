@@ -138,6 +138,8 @@ return [
         Illuminate\Cookie\CookieServiceProvider::class,
         Illuminate\Session\SessionServiceProvider::class,
         Illuminate\Translation\TranslationServiceProvider::class,
+        Illuminate\Auth\AuthServiceProvider::class,
+        Illuminate\Hashing\HashServiceProvider::class,
     ],
 
 ];

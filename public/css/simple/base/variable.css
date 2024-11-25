@@ -1,0 +1,93 @@
+/* Import font Nunito từ Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    /* Khai báo biến font family */
+    --font-primary: 'Nunito', sans-serif;
+    
+    /* Khai báo font weights */
+    --font-light: 300;
+    --font-regular: 400;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+    --font-extrabold: 800;
+
+    /* Khai báo font sizes */
+    --text-xs: 0.75rem;    /* 12px */
+    --text-sm: 0.875rem;   /* 14px */
+    --text-base: 1rem;     /* 16px */
+    --text-lg: 1.125rem;   /* 18px */
+    --text-xl: 1.25rem;    /* 20px */
+    --text-2xl: 1.5rem;    /* 24px */
+    --text-3xl: 1.875rem;  /* 30px */
+    --text-4xl: 2.25rem;   /* 36px */
+
+    /* Màu chính */
+    --primary-100: #FFFFFA;
+    --primary-800: #333138;
+    --primary-900: #000103;
+
+    /* Màu xám */
+    --gray-100: #F5F7FA;
+    --gray-200: #E4E7EB;
+    --gray-300: #CBD2D9;
+    --gray-400: #9AA5B1;
+    --gray-500: #7B8794;
+    --gray-600: #616E7C;
+    --gray-700: #52606D;
+    --gray-800: #3E4C59;
+    --gray-900: #323F4B;
+
+    /* Màu thành công */
+    --success-100: #E3FCEC;
+    --success-500: #27AB6E;
+    --success-900: #05603A;
+
+    /* Màu cảnh báo */
+    --warning-100: #FFF8E6;
+    --warning-500: #F7C948;
+    --warning-900: #8D2B0B;
+
+    /* Màu lỗi */
+    --error-100: #FFE3E3;
+    --error-500: #FF4D4F;
+    --error-900: #7D0000;
+
+    /* Màu trung tính */
+    --white: #FFFFFF;
+    --black: #000000;
+
+    /* Màu nền */
+    --background-primary: var(--white);
+    --background-secondary: var(--gray-100);
+
+    /* Màu chữ */
+    --text-primary: var(--gray-900);
+    --text-secondary: var(--gray-600);
+    --text-tertiary: var(--gray-500);
+}
+
+/* Áp dụng font mặc định cho toàn bộ website */
+body {
+    font-family: var(--font-primary);
+    font-weight: var(--font-regular);
+}
+
+.title {
+    font-family: var(--font-primary);
+    font-weight: var(--font-bold);
+    font-size: var(--text-2xl);
+}
+
+.subtitle {
+    font-family: var(--font-primary);
+    font-weight: var(--font-medium);
+    font-size: var(--text-lg);
+}
+
+.body-text {
+    font-family: var(--font-primary);
+    font-weight: var(--font-regular);
+    font-size: var(--text-base);
+}
