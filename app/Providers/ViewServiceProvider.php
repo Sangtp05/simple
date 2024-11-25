@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\Category;
 
-class AppServiceProvider extends ServiceProvider
+class ViewServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
@@ -27,12 +27,5 @@ class AppServiceProvider extends ServiceProvider
                 ->get();
             $view->with('parentCategories', $parentCategories);
         });
-
-        View::composer('components.header', function ($view) {
-            $categories = Category::with('children')
-                ->whereNull('parent_id')
-                ->get();
-            $view->with('categories', $categories);
-        });
     }
-}
+} 
