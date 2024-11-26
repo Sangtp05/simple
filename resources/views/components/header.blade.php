@@ -15,18 +15,21 @@ $categories = \App\Models\Category::with('children')
 
             <!-- Menu chính -->
             <div class="group_menu d-flex">
-                <a href="/categories" class="menu_link">Sản phẩm
+                <div class="menu_link text-light">
+                    Danh mục sản phẩm
                     <div class="menu_sub_wrapper">
-                        @foreach ($categories as $category)
-                        <a href="{{ route('categories.parent.show', $category->slug) }}" class="">
-                            {{ $category->name }}
-                        </a>
-                        @endforeach
+                        <div class="menu_sub_wrapper_inner">
+                            @foreach ($categories as $category)
+                            <a href="{{ route('categories.parent.show', $category->slug) }}" class="menu_sub_link text-light">
+                                {{ $category->name }}
+                            </a>
+                            @endforeach
+                        </div>
                     </div>
-                </a>
+                </div>
 
-                <a href="/about" class="menu_link">Về chúng tôi</a>
-                <a href="/contact" class="menu_link">Tin tức</a>
+                <a href="/about" class="menu_link text-light">Về chúng tôi</a>
+                <a href="/posts" class="menu_link text-light">Tin tức</a>
             </div>
 
             <div class="group_auth d-flex">
@@ -40,16 +43,16 @@ $categories = \App\Models\Category::with('children')
                         <span class="mr-1">{{ session('customer')->name }}</span>
                         <img src="{{ asset('img/icons/user.svg') }}" alt="User">
                     </button>
-                    <div class="absolute right-0 w-48 mt-2 py-2 bg-white rounded-md shadow-xl hidden group-hover:block">
-                        <a href="/profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    <div class="">
+                        <a href="/profile" class="">
                             Thông tin tài khoản
                         </a>
-                        <a href="/orders" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <a href="/orders" class="">
                             Đơn hàng của tôi
                         </a>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            <button type="submit" class="">
                                 Đăng xuất
                             </button>
                         </form>

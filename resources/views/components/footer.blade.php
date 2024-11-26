@@ -1,54 +1,58 @@
-<footer class="bg-gray-800 text-white">
-    <div class="container mx-auto px-4 py-8">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <!-- Thông tin công ty -->
-            <div>
-                <h3 class="text-lg font-semibold mb-4">Về chúng tôi</h3>
-                <p class="text-gray-400">
-                    Công ty chúng tôi chuyên cung cấp các sản phẩm chất lượng cao với giá cả hợp lý.
-                </p>
-            </div>
-
-            <!-- Liên kết nhanh -->
-            <div>
-                <h3 class="text-lg font-semibold mb-4">Liên kết nhanh</h3>
-                <ul class="space-y-2">
-                    <li><a href="/about" class="text-gray-400 hover:text-white">Giới thiệu</a></li>
-                    <li><a href="/products" class="text-gray-400 hover:text-white">Sản phẩm</a></li>
-                    <li><a href="/contact" class="text-gray-400 hover:text-white">Liên hệ</a></li>
-                    <li><a href="/policy" class="text-gray-400 hover:text-white">Chính sách</a></li>
-                </ul>
-            </div>
-
-            <!-- Thông tin liên hệ -->
-            <div>
-                <h3 class="text-lg font-semibold mb-4">Liên hệ</h3>
-                <ul class="space-y-2 text-gray-400">
-                    <li><i class="fas fa-map-marker-alt mr-2"></i> 123 Đường ABC, Quận XYZ</li>
-                    <li><i class="fas fa-phone mr-2"></i> 0123 456 789</li>
-                    <li><i class="fas fa-envelope mr-2"></i> info@example.com</li>
-                </ul>
-            </div>
-
-            <!-- Mạng xã hội -->
-            <div>
-                <h3 class="text-lg font-semibold mb-4">Kết nối với chúng tôi</h3>
-                <div class="flex space-x-4">
-                    <a href="#" class="text-gray-400 hover:text-white">
-                        <i class="fab fa-facebook fa-2x"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white">
-                        <i class="fab fa-twitter fa-2x"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white">
-                        <i class="fab fa-instagram fa-2x"></i>
-                    </a>
+@php
+$categories = \App\Models\Category::with('children')
+->whereNull('parent_id')
+->get();
+@endphp
+<footer class="footer">
+    <div class="container mb-4">
+        <div class="row">
+            <div class="col-12 col-md-12 mb-4">
+                <div class="footer_logo_wrapper">
+                    <img src="{{ asset('img/logo.svg') }}" alt="Logo" class="footer_logo">
+                    <p class="title text-light">
+                        Khám phá phong cách của bạn cùng chúng tôi!
+                    </p>
                 </div>
             </div>
+            <div class="col-12 col-md-4">
+                <h3 class="subtitle text-light bold">Liên hệ</h3>
+                <ul class="footer_link">
+                    <li class="d-flex">
+                        <p class="me-2 text-light">Email: </p><a href="mailto:info@simple.com" class="text-light">info@simple.com</a>
+                    </li>
+                    <li class="d-flex">
+                        <p class="me-2 text-light">SĐT: </p><a href="tel:+8490909090" class="text-light">+84 909 090 909</a>
+                    </li>
+                    <li class="d-flex">
+                        <p class="me-2 text-light">Facebook: </p><a href="https://www.facebook.com/simple" class="text-light">SIMPLE</a>
+                    </li>
+                    <li class="d-flex">
+                        <p class="me-2 text-light">Địa chỉ: </p><a href="" class="text-light">Đà Nẵng</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-12 col-md-4">
+                <h3 class="subtitle text-light bold">Liên kết nhanh</h3>
+                <ul class="footer_link">
+                    <li><a href="/about" class="text-light">Về chúng tôi</a></li>
+                    <li><a href="/products" class="text-light">Sản phẩm</a></li>
+                    <li><a href="/posts" class="text-light">Tin tức</a></li>
+                    <li><a href="/policy" class="text-light">Chính sách</a></li>
+                </ul>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <h3 class="subtitle text-light bold">Danh mục sản phẩm</h3>
+                <ul class="footer_link">
+                    @foreach ($categories as $category)
+                    <li><a href="/categories/{{ $category->slug }}" class="text-light">{{ $category->name }}</a></li>
+                    @endforeach
+                </ul>
+            </div>
         </div>
 
-        <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; {{ date('Y') }} Tên công ty. Tất cả quyền được bảo lưu.</p>
-        </div>
     </div>
-</footer> 
+    <div class="footer_copyright">
+        <p>SIMPLE@2024</p>
+    </div>
+</footer>

@@ -2,17 +2,16 @@
 
 .header {
     background-color: var(--primary-900);
-    padding: 12px 0;
 }
 
 .header_nav a {
-    color: var(--primary-100);
     text-decoration: none;
     font-size: var(--text-base);
 }
 
 .logo_img {
     width: 36px;
+    padding: 12px 0;
 }
 
 .group_menu  {
@@ -22,6 +21,7 @@
 
 .group_auth {
     gap: 24px;
+    padding: 12px 0;
 }
 
 .header_nav .register_link {
@@ -47,4 +47,71 @@
     border-radius: 18px;
     border: 1px solid var(--primary-100);
     font-size: var(--text-base);
+}
+
+.menu_link {
+    position: relative;
+    padding: 18px 0;
+    cursor: pointer;
+}
+
+.menu_link:hover .menu_sub_wrapper,
+.menu_sub_wrapper:hover {
+    display: block;
+}
+
+.menu_sub_wrapper {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--primary-900);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.menu_sub_wrapper_inner {
+    display: flex;
+    flex-direction: column;
+    min-width: 180px;
+}
+
+.menu_sub_link {
+    width: 100%;
+    padding: 12px;
+    transition: all 0.3s ease;
+}
+
+.menu_sub_link:hover {
+    background-color: var(--primary-800);
+}
+
+
+
+.footer {
+    background-color: var(--primary-900);
+    padding: 48px 0 0 0;
+}
+
+.footer_logo {
+    width: 60px;
+    height: 60px;
+}
+
+.footer_logo_wrapper {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.footer_copyright {
+    background-color: var(--primary-800);
+    padding: 12px 0;
+    color: var(--primary-100);
+    text-align: center;
+}
+
+.footer_copyright p {
+    font-size: var(--text-sm);
+    margin: 0;
 }

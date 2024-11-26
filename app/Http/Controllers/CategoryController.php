@@ -5,14 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Services\BreadcrumbService;
 
 class CategoryController extends Controller
 {
+    protected $breadcrumbService;
+
+    public function __construct(BreadcrumbService $breadcrumbService)
+    {
+        $this->breadcrumbService = $breadcrumbService;
+    }
+
     public function index()
     {
         $parentCategories = Category::whereNull('parent_id')
             ->with('children')
             ->get();
+
+        $this->breadcrumbService->add('Danh mục', route('categories.index'));
+
         return view('categories.index', compact('parentCategories'));
     }
 
@@ -20,6 +31,9 @@ class CategoryController extends Controller
     {
         $categoryParent = Category::where('slug', $categoryParent)->first();
         $categoryParent->load('children');
+
+        $this->breadcrumbService->add($categoryParent->name);
+
         return view('categories.parent', compact('categoryParent'));
     }
 
@@ -30,4 +44,5 @@ class CategoryController extends Controller
         $products = Product::where('category_id', $categoryChild->id)->get();
         return view('categories.child', compact('categoryParent', 'categoryChild', 'products'));
     }
+
 }

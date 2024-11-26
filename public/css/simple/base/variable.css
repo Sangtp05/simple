@@ -91,3 +91,36 @@ body {
     font-weight: var(--font-regular);
     font-size: var(--text-base);
 }
+
+.bg-dark {
+    background-color: var(--primary-900);
+}
+
+.section {
+    padding: 48px 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+p {
+    margin: 0;
+}
+
+.bold {
+    font-weight: var(--font-bold);
+}
+
+.semibold {
+    font-weight: var(--font-semibold);
+}
+
+.thin {
+    font-weight: var(--font-light);
+}
