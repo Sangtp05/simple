@@ -21,10 +21,11 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            CategorySeeder::class,      // Chạy đầu tiên vì Product cần category_id
+            // CategorySeeder::class,      // Chạy đầu tiên vì Product cần category_id
             ProductSeeder::class,       // Chạy thứ hai vì ProductAttribute và ProductImage cần product_id
-            ProductAttributeSeeder::class,
-            ProductImageSeeder::class
+            // ProductAttributeSeeder::class,
+            // ProductImageSeeder::class
+            BannerSeeder::class,
         ]);
     }
 }
