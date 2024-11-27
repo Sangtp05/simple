@@ -30,4 +30,9 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public static function getAllParentCategories()
+    {
+        return Category::whereNull('parent_id')->get();
+    }
 }

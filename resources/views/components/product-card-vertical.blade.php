@@ -1,6 +1,6 @@
 <div class="h-100 vertical-product-card">
     <div class="position-relative">
-        <img src="{{ $product->images->first()->image }}"
+        <img src="{{ Storage::url($product->images->first()->image) }}"
             class="card-img-top product-image"
             alt="{{ $product->name }}">
     </div>

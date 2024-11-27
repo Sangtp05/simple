@@ -2,9 +2,8 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ProductImageResource\Pages;
-use App\Filament\Resources\ProductImageResource\RelationManagers;
-use App\Models\ProductImage;
+use App\Filament\Resources\ProductLibraryImageResource\Pages;
+use App\Models\ProductLibraryImage;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,9 +12,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ProductImageResource extends Resource
+class ProductLibraryImageResource extends Resource
 {
-    protected static ?string $model = ProductImage::class;
+    protected static ?string $model = ProductLibraryImage::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -29,8 +28,11 @@ class ProductImageResource extends Resource
                 Forms\Components\FileUpload::make('image')
                     ->image()
                     ->required(),
-                Forms\Components\Toggle::make('is_primary')
-                    ->default(false),
+                Forms\Components\Textarea::make('content')
+                    ->required()
+                    ->maxLength(65535),
+                Forms\Components\Toggle::make('is_active')
+                    ->required(),
                 Forms\Components\TextInput::make('order')
                     ->numeric()
                     ->default(0),
@@ -44,13 +46,27 @@ class ProductImageResource extends Resource
                 Tables\Columns\TextColumn::make('product.name')
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('image'),
-                Tables\Columns\IconColumn::make('is_primary')
+                Tables\Columns\TextColumn::make('content')
+                    ->limit(50),
+                Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('order')
                     ->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\TernaryFilter::make('is_active')
+                    ->label('Trạng thái')
+                    ->placeholder('Tất cả')
+                    ->trueLabel('Đang hoạt động')
+                    ->falseLabel('Không hoạt động'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -72,9 +88,9 @@ class ProductImageResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListProductImages::route('/'),
-            'create' => Pages\CreateProductImage::route('/create'),
-            'edit' => Pages\EditProductImage::route('/{record}/edit'),
+            'index' => Pages\ListProductLibraryImages::route('/'),
+            'create' => Pages\CreateProductLibraryImage::route('/create'),
+            'edit' => Pages\EditProductLibraryImage::route('/{record}/edit'),
         ];
     }
 

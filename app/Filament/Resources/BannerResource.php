@@ -14,7 +14,7 @@ class BannerResource extends Resource
 {
     protected static ?string $model = Banner::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-photograph';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
@@ -61,5 +61,10 @@ class BannerResource extends Resource
             'create' => Pages\CreateBanner::route('/create'),
             'edit' => Pages\EditBanner::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Homepage';
     }
 }

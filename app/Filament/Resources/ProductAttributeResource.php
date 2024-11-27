@@ -74,4 +74,9 @@ class ProductAttributeResource extends Resource
             'edit' => Pages\EditProductAttribute::route('/{record}/edit'),
         ];
     }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Product';
+    }
 }

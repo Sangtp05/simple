@@ -18,11 +18,11 @@
 </section>
 
 <section class="section">
-    @include('homepage.partials.special-categories')
+    @include('homepage.partials.special-categories', ['categories' => $categories])
 </section>
 
 <section class="section">
-    @include('homepage.partials.image-library')
+    @include('homepage.partials.image-library', ['productLibraryImages' => $productLibraryImages])
 </section>
 
 <section class="section">
