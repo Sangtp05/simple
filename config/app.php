@@ -141,6 +141,7 @@ return [
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Hashing\HashServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
+        Illuminate\Pagination\PaginationServiceProvider::class,
     ],
 
 ];
