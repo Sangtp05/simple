@@ -2,10 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Customer extends Model
+class Customer extends Authenticatable
 {
+    use Notifiable;
+
+    protected $guard = 'customer';
+
     protected $fillable = [
         'name',
         'email',
@@ -13,6 +18,10 @@ class Customer extends Model
         'phone',
         'address',
         'is_active'
+    ];
+
+    protected $hidden = [
+        'password',
     ];
 
     // Relationship với giỏ hàng

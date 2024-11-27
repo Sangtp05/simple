@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -16,28 +16,27 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $request->validate([
+        $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required'
         ]);
 
-        $customer = Customer::where('email', $request->email)->first();
-
-        if (!$customer || !Hash::check($request->password, $customer->password)) {
-            return back()->withErrors([
-                'email' => 'Email hoặc mật khẩu không chính xác.',
-            ]);
+        if (Auth::guard('customer')->attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect('/')->with('success', 'Đăng nhập thành công!');
         }
 
-        // Lưu thông tin customer vào session
-        session(['customer' => $customer]);
-
-        return redirect('/')->with('success', 'Đăng nhập thành công!');
+        return back()->withErrors([
+            'email' => 'Email hoặc mật khẩu không chính xác.',
+        ]);
     }
 
     public function logout(Request $request)
     {
-        $request->session()->forget('customer');
+        Auth::guard('customer')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        
         return redirect('/');
     }
 }

@@ -33,7 +33,7 @@ $categories = \App\Models\Category::with('children')
             </div>
 
             <div class="group_auth d-flex">
-                @if(session('customer'))
+                @auth('customer')
                 <div class="item_auth">
                     <a href="/cart" class="">
                         <img src="{{ asset('img/icons/cart.svg') }}" alt="Giỏ hàng">
@@ -44,9 +44,9 @@ $categories = \App\Models\Category::with('children')
                     <div class="item_auth_sub_wrapper">
                         <div class="item_auth_sub_wrapper_inner">
                             <p class="text-light bold name_customer px-4">
-                                Hi, {{ session('customer')->name }}
+                                Hi, {{ auth('customer')->user()->name }}
                             </p>
-                            <a href="/profile" class="menu_sub_link text-light">
+                            <a href="{{ route('customer.profile') }}" class="menu_sub_link text-light">
                                 <img src="{{ asset('img/icons/user.svg') }}" class="mr-2" alt="User">
                                 Thông tin tài khoản
                             </a>
@@ -69,11 +69,11 @@ $categories = \App\Models\Category::with('children')
                     <a href="{{ route('login') }}" class="login_link auth_link">Đăng nhập</a>
                 </div>
                 <div class="item_auth_btn">
-                    <a href="{{ route('register') }}" class="register_link auth_link">
+                    <a href="{{ route('customer.register') }}" class="register_link auth_link">
                         Đăng ký
                     </a>
                 </div>
-                @endif
+                @endauth
             </div>
         </div>
     </nav>

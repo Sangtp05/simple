@@ -65,7 +65,7 @@
                             </div>
 
                             <div class="text-center mt-3">
-                                <a href="{{ route('register') }}" class="text-decoration-none text-light">
+                                <a href="{{ route('customer.register') }}" class="text-decoration-none text-light">
                                     Chưa có tài khoản? Đăng ký ngay
                                 </a>
                             </div>
