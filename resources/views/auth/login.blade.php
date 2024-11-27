@@ -1,65 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng nhập</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100">
-    <div class="min-h-screen flex items-center justify-center">
-        <div class="bg-white p-8 rounded-lg shadow-md w-96">
-            <h2 class="text-2xl font-bold mb-6 text-center">Đăng nhập</h2>
+@extends('layouts.app')
+@section('title', 'Đăng nhập')
+@push('styles')
+<link rel="stylesheet" href="{{ asset('css/simple/pages/auth/auth.css') }}">
+@endpush
+@push('scripts')
+<script src="{{ asset('js/simple/auth/auth.js') }}"></script>
+@endpush
 
-            @if ($errors->any())
-                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+@section('content')
+<section class="section section-auth">
+    <div class="container">
+        <div class="row justify-content-end">
+            <div class="col-md-6 col-lg-6 col-12">
+                <div class="card shadow">
+                    <div class="card-body p-4">
+                        <h2 class="card-title text-light text-center mb-4 fw-bold">Đăng nhập</h2>
+                        
+                        @if ($errors->any())
+                        <div class="alert alert-danger mb-4">
+                            <ul class="mb-0">
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+
+                        @if (session('success'))
+                        <div class="alert alert-success mb-4">
+                            {{ session('success') }}
+                        </div>
+                        @endif
+
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold text-light" for="email">
+                                    Email
+                                </label>
+                                <input class="form-control" 
+                                    id="email" 
+                                    type="email" 
+                                    name="email" 
+                                    value="{{ old('email') }}" 
+                                    required>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold text-light" for="password">
+                                    Mật khẩu
+                                </label>
+                                <input class="form-control" 
+                                    id="password" 
+                                    type="password" 
+                                    name="password" 
+                                    required>
+                            </div>
+
+                            <div class="text-center">
+                                <button class="btn btn-outline-light fw-semibold" 
+                                    type="submit">
+                                    Đăng nhập
+                                </button>
+                            </div>
+
+                            <div class="text-center mt-3">
+                                <a href="{{ route('register') }}" class="text-decoration-none text-light">
+                                    Chưa có tài khoản? Đăng ký ngay
+                                </a>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            @endif
-
-            @if (session('success'))
-                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
-                    {{ session('success') }}
-                </div>
-            @endif
-
-            <form method="POST" action="{{ route('login') }}">
-                @csrf
-
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
-                        Email
-                    </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="email" type="email" name="email" value="{{ old('email') }}" required>
-                </div>
-
-                <div class="mb-6">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-                        Mật khẩu
-                    </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="password" type="password" name="password" required>
-                </div>
-
-                <div class="flex items-center justify-between">
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
-                        type="submit">
-                        Đăng nhập
-                    </button>
-                </div>
-
-                <div class="mt-4 text-center">
-                    <a href="{{ route('register') }}" class="text-blue-500 hover:text-blue-700">
-                        Chưa có tài khoản? Đăng ký ngay
-                    </a>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
-</body>
-</html> 
+</section>
+@endsection

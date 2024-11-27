@@ -72,6 +72,7 @@
 body {
     font-family: var(--font-primary);
     font-weight: var(--font-regular);
+    background-color: var(--primary-100);
 }
 
 .title {
@@ -123,4 +124,10 @@ p {
 
 .thin {
     font-weight: var(--font-light);
+}
+
+.btn-none {
+    border: none;
+    background: none;
+    padding: 0;
 }

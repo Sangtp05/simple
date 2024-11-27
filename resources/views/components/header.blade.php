@@ -34,35 +34,45 @@ $categories = \App\Models\Category::with('children')
 
             <div class="group_auth d-flex">
                 @if(session('customer'))
-                <a href="/cart" class="">
-                    <img src="{{ asset('img/icons/cart.svg') }}" alt="Giỏ hàng">
-                    <span class="">Giỏ hàng</span>
-                </a>
-                <div class="">
-                    <button class="">
-                        <span class="mr-1">{{ session('customer')->name }}</span>
-                        <img src="{{ asset('img/icons/user.svg') }}" alt="User">
-                    </button>
-                    <div class="">
-                        <a href="/profile" class="">
-                            Thông tin tài khoản
-                        </a>
-                        <a href="/orders" class="">
-                            Đơn hàng của tôi
-                        </a>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="">
-                                Đăng xuất
-                            </button>
-                        </form>
+                <div class="item_auth">
+                    <a href="/cart" class="">
+                        <img src="{{ asset('img/icons/cart.svg') }}" alt="Giỏ hàng">
+                    </a>
+                </div>
+                <div class="item_auth">
+                    <img src="{{ asset('img/icons/user.svg') }}" alt="User">
+                    <div class="item_auth_sub_wrapper">
+                        <div class="item_auth_sub_wrapper_inner">
+                            <p class="text-light bold name_customer px-4">
+                                Hi, {{ session('customer')->name }}
+                            </p>
+                            <a href="/profile" class="menu_sub_link text-light">
+                                <img src="{{ asset('img/icons/user.svg') }}" class="mr-2" alt="User">
+                                Thông tin tài khoản
+                            </a>
+                            <a href="/orders" class="menu_sub_link text-light">
+                                <img src="{{ asset('img/icons/order.svg') }}" class="mr-2" alt="Đơn hàng">
+                                Đơn hàng của tôi
+                            </a>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="btn-none menu_sub_link text-light">
+                                    <img src="{{ asset('img/icons/logout.svg') }}" class="mr-2" alt="Đăng xuất">
+                                    Đăng xuất
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 @else
-                <a href="{{ route('login') }}" class="login_link auth_link">Đăng nhập</a>
-                <a href="{{ route('register') }}" class="register_link auth_link">
-                    Đăng ký
-                </a>
+                <div class="item_auth_btn">
+                    <a href="{{ route('login') }}" class="login_link auth_link">Đăng nhập</a>
+                </div>
+                <div class="item_auth_btn">
+                    <a href="{{ route('register') }}" class="register_link auth_link">
+                        Đăng ký
+                    </a>
+                </div>
                 @endif
             </div>
         </div>

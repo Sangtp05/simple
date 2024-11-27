@@ -24,9 +24,6 @@ $categories = \App\Models\Category::with('children')
                         <p class="me-2 text-light">SĐT: </p><a href="tel:+8490909090" class="text-light">+84 909 090 909</a>
                     </li>
                     <li class="d-flex">
-                        <p class="me-2 text-light">Facebook: </p><a href="https://www.facebook.com/simple" class="text-light">SIMPLE</a>
-                    </li>
-                    <li class="d-flex">
                         <p class="me-2 text-light">Địa chỉ: </p><a href="" class="text-light">Đà Nẵng</a>
                     </li>
                 </ul>
