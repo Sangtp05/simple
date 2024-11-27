@@ -12,14 +12,11 @@ use App\Http\Controllers\Customer\OrderController;
 
 Route::get('/', [HomepageController::class, 'index'])->name('homepage.index');
 
-Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
-
-Route::get('/categories/{categoryParent}', [CategoryController::class, 'showParent'])
+Route::get('/product/{categoryParent}', [CategoryController::class, 'showParent'])
     ->name('categories.parent.show');
-Route::get('/categories/{categoryParent}/{categoryChild}', [CategoryController::class, 'showChild'])
+Route::get('/product/{categoryParent}/{categoryChild}', [CategoryController::class, 'showChild'])
     ->name('categories.child.show');
-
-Route::get('/products/{slug}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/product/{categoryParent}/{categoryChild}/{slug}', [ProductController::class, 'show'])->name('products.show');
 
 Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register']);

@@ -17,6 +17,9 @@
     @include('components.header')
 
     <main>
+        @if (!Route::is('homepage.index'))
+        <x-breadcrumb />
+        @endif
         @yield('content')
     </main>
 

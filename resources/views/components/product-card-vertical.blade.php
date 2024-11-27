@@ -4,10 +4,13 @@
             class="card-img-top product-image"
             alt="{{ $product->name }}">
     </div>
-
     <div class="vertical-product-card-body d-flex flex-column">
         <h5 class="card-title product-title mb-1">
-            <a href="{{ route('products.show', $product->id) }}"
+            <a href="{{ route('products.show', [
+    'categoryParent' => $product->category->parent->slug,
+    'categoryChild' => $product->category->slug,
+                'slug' => $product->slug
+            ]) }}"
                 class="text-decoration-none text-dark">
                 {{ $product->name }}
             </a>
@@ -26,7 +29,12 @@
     </div>
     <div class="d-flex">
         <button class="btn btn-dark w-100 view-detail">
-            <a href="{{ route('products.show', $product->id) }}" class="text-decoration-none text-white">
+            <a href="{{ route('products.show', [
+                'categoryParent' => $product->category->parent->slug,
+                'categoryChild' => $product->category->slug,
+                'slug' => $product->slug
+            ]) }}"
+                class="text-decoration-none text-white">
                 Xem chi tiết</a>
         </button>
         <button class="btn btn-primary add-to-cart"

@@ -152,3 +152,14 @@
     font-size: var(--text-sm);
     margin: 0;
 }
+
+.breadcrumb {
+    background-color: transparent;
+    align-items: center;
+    margin: 0;
+}
+
+.breadcrumb-logo {
+    width: 20px;
+    height: 20px;
+}

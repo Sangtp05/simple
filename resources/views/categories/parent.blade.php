@@ -1,52 +1,23 @@
 @extends('layouts.app')
-
+@push('styles')
+<link rel="stylesheet" href="{{ asset('css/simple/pages/category/parent.css') }}">
+@endpush
 @section('content')
-<x-breadcrumb />
-<section class="section">
-    <div class="container">
-        <h1>{{ $categoryParent->name }}</h1>
-
-        <div class="row">
-            <div class="col-md-3">
-                <!-- Danh sách category cha -->
-                <div class="card">
-                    <div class="card-header">
-                        Danh mục chính
-                    </div>
-                    <div class="card-body">
-                        <h5>{{ $categoryParent->name }}</h5>
-                        <!-- Danh sách category con -->
-                        <ul class="list-unstyled">
-                            @foreach($categoryParent->children as $child)
-                            <li>
-                                <a href="{{ route('categories.child.show', [$categoryParent->slug, $child->slug]) }}">
-                                    {{ $child->name }}
-                                </a>
-                            </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-9">
-                <!-- Hiển thị thông tin về category cha và các category con nổi bật -->
-                @foreach($categoryParent->children as $child)
-                <div class="card mb-3">
-                    <div class="card-header">
-                        <h3>{{ $child->name }}</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>{{ $child->description }}</p>
-                        <a href="{{ route('categories.child.show', [$categoryParent->slug, $child->slug]) }}"
-                            class="btn btn-primary">
-                            Xem sản phẩm
-                        </a>
-                    </div>
-                </div>
-                @endforeach
-            </div>
+<div class="category-image-wrapper">
+    <img class="category-image" src="{{ Storage::url($categoryParent->image) }}" alt="{{ $categoryParent->name }}">
+    <h1 class="category-name">{{ $categoryParent->name }}</h1>
+</div>
+<div class="group-child">
+    @foreach($categoryParent->children as $child)
+    <a href="{{ route('categories.child.show', [$categoryParent->slug, $child->slug]) }}"
+        class="text-decoration-none category-child-wrapper">
+        <img class="category-child-image" src="{{ Storage::url($child->image) }}"
+            alt="{{ $child->name }}">
+        <div class="category-child-content">
+            <h3 class="category-child-name">{{ $child->name }}</h3>
+            <p class="category-child-description">{{ $child->description }}</p>
         </div>
-    </div>
-</section>
+    </a>
+    @endforeach
+</div>
 @endsection

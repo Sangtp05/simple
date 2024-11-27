@@ -41,15 +41,15 @@
         <!-- Thông tin sản phẩm -->
         <div class="col-md-6">
             <h1 class="product-title mb-3">{{ $product->name }}</h1>
-            
+
             <div class="product-price mb-4">
                 @if($product->sale_price)
-                    <span class="sale-price">{{ number_format($product->sale_price) }}đ</span>
-                    <span class="original-price text-muted text-decoration-line-through">
-                        {{ number_format($product->price) }}đ
-                    </span>
+                <span class="sale-price">{{ number_format($product->sale_price) }}đ</span>
+                <span class="original-price text-muted text-decoration-line-through">
+                    {{ number_format($product->price) }}đ
+                </span>
                 @else
-                    <span class="price">{{ number_format($product->price) }}đ</span>
+                <span class="price">{{ number_format($product->price) }}đ</span>
                 @endif
             </div>
 
@@ -61,7 +61,7 @@
             <form action="{{ route('cart.add') }}" method="POST" class="mb-4">
                 @csrf
                 <input type="hidden" name="product_id" value="{{ $product->id }}">
-                
+
                 <div class="quantity-selector mb-3">
                     <label for="quantity" class="form-label">Số lượng:</label>
                     <div class="input-group" style="width: 130px;">
@@ -79,13 +79,13 @@
                 <p><strong>Mã sản phẩm:</strong> {{ $product->sku }}</p>
                 <p><strong>Danh mục:</strong> {{ $product->category->name }}</p>
                 @if($product->stock_status)
-                    <p><strong>Tình trạng:</strong> 
-                        <span class="text-success">Còn hàng</span>
-                    </p>
+                <p><strong>Tình trạng:</strong>
+                    <span class="text-success">Còn hàng</span>
+                </p>
                 @else
-                    <p><strong>Tình trạng:</strong> 
-                        <span class="text-danger">Hết hàng</span>
-                    </p>
+                <p><strong>Tình trạng:</strong>
+                    <span class="text-danger">Hết hàng</span>
+                </p>
                 @endif
             </div>
         </div>
@@ -129,7 +129,12 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ $relatedProduct->name }}</h5>
                         <p class="card-text">{{ number_format($relatedProduct->price) }}đ</p>
-                        <a href="{{ route('products.show', $relatedProduct->slug) }}" class="btn btn-outline-primary">
+                        <a href="{{ route('products.show', [
+                            'categoryParent' => $relatedProduct->category->parent->slug,
+                            'categoryChild' => $relatedProduct->category->slug,
+                            'slug' => $relatedProduct->slug
+                        ]) }}"
+                            class="btn btn-outline-primary">
                             Xem chi tiết
                         </a>
                     </div>
@@ -143,54 +148,54 @@
 
 @push('styles')
 <style>
-.product-gallery .thumbnail {
-    cursor: pointer;
-    transition: opacity 0.2s;
-}
+    .product-gallery .thumbnail {
+        cursor: pointer;
+        transition: opacity 0.2s;
+    }
 
-.product-gallery .thumbnail:hover {
-    opacity: 0.8;
-}
+    .product-gallery .thumbnail:hover {
+        opacity: 0.8;
+    }
 
-.sale-price {
-    color: #dc3545;
-    font-size: 1.5rem;
-    font-weight: bold;
-}
+    .sale-price {
+        color: #dc3545;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
 
-.original-price {
-    font-size: 1.1rem;
-    margin-left: 10px;
-}
+    .original-price {
+        font-size: 1.1rem;
+        margin-left: 10px;
+    }
 
-.quantity-selector input {
-    border-left: 0;
-    border-right: 0;
-}
+    .quantity-selector input {
+        border-left: 0;
+        border-right: 0;
+    }
 </style>
 @endpush
 
 @push('scripts')
 <script>
-function incrementQuantity() {
-    const input = document.getElementById('quantity');
-    input.value = parseInt(input.value) + 1;
-}
-
-function decrementQuantity() {
-    const input = document.getElementById('quantity');
-    if (parseInt(input.value) > 1) {
-        input.value = parseInt(input.value) - 1;
+    function incrementQuantity() {
+        const input = document.getElementById('quantity');
+        input.value = parseInt(input.value) + 1;
     }
-}
 
-// Xử lý click thumbnail
-document.querySelectorAll('.thumbnail').forEach(thumb => {
-    thumb.addEventListener('click', function() {
-        const mainImage = document.querySelector('.main-image img');
-        mainImage.src = this.src;
+    function decrementQuantity() {
+        const input = document.getElementById('quantity');
+        if (parseInt(input.value) > 1) {
+            input.value = parseInt(input.value) - 1;
+        }
+    }
+
+    // Xử lý click thumbnail
+    document.querySelectorAll('.thumbnail').forEach(thumb => {
+        thumb.addEventListener('click', function() {
+            const mainImage = document.querySelector('.main-image img');
+            mainImage.src = this.src;
+        });
     });
-});
 </script>
 @endpush
-@endsection 
+@endsection

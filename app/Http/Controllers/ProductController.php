@@ -13,7 +13,7 @@ class ProductController extends Controller
         return view('products.index', compact('products'));
     }
 
-    public function show($slug)
+    public function show($categoryParent, $categoryChild, $slug)
     {
         $product = Product::where('slug', $slug)
             ->with(['category', 'images'])
