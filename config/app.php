@@ -140,6 +140,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Hashing\HashServiceProvider::class,
+        Illuminate\Validation\ValidationServiceProvider::class,
     ],
 
 ];

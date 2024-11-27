@@ -1,52 +1,54 @@
-install
-```
+# Cài đặt và Cấu hình
+
+## Cài đặt dependencies
+```bash
 composer install
 ```
 
-create database
-
-add .env file  
-```
+## Cấu hình môi trường
+1. Tạo file .env:
+```bash
 cp .env.example .env
 ```
 
-Edit .env file 
+2. Cấu hình database trong file .env:
+```
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=simple
 DB_USERNAME=root
 DB_PASSWORD=
-
-create key
 ```
+
+3. Tạo application key:
+```bash
 php artisan key:generate
 ```
 
-create tables simple
-migrate
-```
+## Cài đặt Database
+1. Tạo các bảng:
+```bash
 php artisan migrate
 ```
 
-seed
-```
+2. Thêm dữ liệu mẫu:
+```bash
 php artisan db:seed
 ```
 
-link storage
-```
+## Cấu hình Storage
+```bash
 php artisan storage:link
 ```
 
-Create user
-```
+## Tạo tài khoản Filament
+```bash
 php artisan make:filament-user
 ```
 
-
-run
-```
+## Chạy ứng dụng
+```bash
 php artisan serve
 ``` 
 
