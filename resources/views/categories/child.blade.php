@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', $categoryChild->name)
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/simple/pages/category/child.css') }}">
 <link rel="stylesheet" href="{{ asset('css/components/product-card.css') }}">

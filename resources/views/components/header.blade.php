@@ -35,8 +35,9 @@ $categories = \App\Models\Category::with('children')
             <div class="group_auth d-flex">
                 @auth('customer')
                 <div class="item_auth">
-                    <a href="/cart" class="">
+                    <a href="/cart" class="position-relative">
                         <img src="{{ asset('img/icons/cart.svg') }}" alt="Giỏ hàng">
+                        <span id="has-items">12</span>
                     </a>
                 </div>
                 <div class="item_auth">

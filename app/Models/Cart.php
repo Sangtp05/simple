@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Product;
 
 class Cart extends Model
 {
@@ -13,15 +14,18 @@ class Cart extends Model
         'price'
     ];
 
-    // Relationship với khách hàng
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
     public function customer()
     {
         return $this->belongsTo(Customer::class);
     }
 
-    // Relationship với sản phẩm (giả sử bạn có model Product)
-    public function product()
+    public static function deleteCart()
     {
-        return $this->belongsTo(Product::class);
+        return self::where('customer_id', auth()->guard('customer')->id())->delete();
     }
 }

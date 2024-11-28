@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', $categoryParent->name)
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/simple/pages/category/parent.css') }}">
 @endpush

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Đăng nhập')
+@section('title', 'Đăng ký')
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/simple/pages/auth/auth.css') }}">
 @endpush

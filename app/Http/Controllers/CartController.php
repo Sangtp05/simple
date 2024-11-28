@@ -2,51 +2,106 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\Cart;
 use Illuminate\Http\Request;
+use App\Services\BreadcrumbService;
+use Illuminate\Support\Facades\DB;
+use App\Models\Product;
 
 class CartController extends Controller
 {
-    public function index()
+    protected $breadcrumbService;
+
+    public function __construct(BreadcrumbService $breadcrumbService)
     {
-        $cartItems = session()->get('cart', []);
-        return view('cart.index', compact('cartItems'));
+        $this->breadcrumbService = $breadcrumbService;
+    }
+    public function show()
+    {
+        $this->breadcrumbService->add('Giỏ hàng');
+
+        $carts = Cart::with(['product'])
+            ->where('customer_id', auth()->guard('customer')->user()->id)
+            ->get();
+
+        $total = $carts->sum(function ($cart) {
+            return $cart->price * $cart->quantity;
+        });
+
+        return view('customer.cart.show', compact('carts', 'total'));
     }
 
-    public function add(Request $request)
+    public function get()
+    {
+        $carts = Cart::with(['product.primaryImage'])
+            ->where('customer_id', auth()->guard('customer')->id())
+            ->get();
+
+        $total = $carts->sum(function($cart) {
+            return $cart->price * $cart->quantity;
+        });
+
+        return response()->json([
+            'carts' => $carts,
+            'total' => $total
+        ]);
+    }
+    public function update(Request $request)
     {
         $request->validate([
             'product_id' => 'required|exists:products,id',
-            'quantity' => 'required|integer|min:1'
+            'quantity' => 'required|integer|min:0'
         ]);
 
-        $product = Product::findOrFail($request->product_id);
-        $cart = session()->get('cart', []);
-        
-        // Nếu sản phẩm đã có trong giỏ hàng thì cộng thêm số lượng
-        if(isset($cart[$product->id])) {
-            $cart[$product->id]['quantity'] += $request->quantity;
+        $cart = Cart::where('customer_id', auth()->guard('customer')->id())
+            ->where('product_id', $request->product_id)
+            ->first();
+
+        if ($cart) {
+            if ($request->quantity > 0) {
+                $cart->update(['quantity' => $request->quantity]);
+                $message = 'Giỏ hàng đã được cập nhật';
+            } else {
+                $cart->delete();
+                $message = 'Sản phẩm đã được xóa khỏi giỏ hàng';
+            }
         } else {
-            // Nếu chưa có thì thêm mới
-            $cart[$product->id] = [
-                'name' => $product->name,
+            // Thêm mới nếu chưa có trong giỏ hàng
+            $product = Product::findOrFail($request->product_id);
+            Cart::create([
+                'customer_id' => auth()->guard('customer')->id(),
+                'product_id' => $request->product_id,
                 'quantity' => $request->quantity,
-                'price' => $product->sale_price ?? $product->price,
-                'image' => $product->image
-            ];
+                'price' => $product->price
+            ]);
+            $message = 'Đã thêm sản phẩm vào giỏ hàng';
         }
-        
-        session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Sản phẩm đã được thêm vào giỏ hàng!');
+
+        $cartCount = Cart::where('customer_id', auth()->guard('customer')->id())->count();
+        $total = Cart::where('customer_id', auth()->guard('customer')->id())
+            ->sum(DB::raw('price * quantity'));
+
+        return response()->json([
+            'success' => true,
+            'message' => $message,
+            'total' => $total,
+            'cartCount' => $cartCount
+        ]);
     }
 
-    public function update(Request $request)
+    public function getCart()
     {
-        if($request->id && $request->quantity){
-            $cart = session()->get('cart');
-            $cart[$request->id]["quantity"] = $request->quantity;
-            session()->put('cart', $cart);
-            return response()->json(['success' => true]);
-        }
+        $carts = Cart::with(['product.primaryImage'])
+            ->where('customer_id', auth()->guard('customer')->id())
+            ->get();
+
+        $total = $carts->sum(function($cart) {
+            return $cart->price * $cart->quantity;
+        });
+
+        return response()->json([
+            'carts' => $carts,
+            'total' => $total
+        ]);
     }
-} 
+}

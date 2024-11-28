@@ -1,0 +1,81 @@
+.cart-product-image {
+    max-width: 120px;
+}
+
+.cart-product-image img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.cart-product-image p {
+    flex: 1;
+}
+
+.product-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cart-input-group {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+.cart-input-group input {
+    width: 80px;
+    height: 40px;
+    border: none;
+    border-top: 1px solid #ced4da;
+    border-bottom: 1px solid #ced4da;
+    text-align: center;
+}
+
+.cart-input-group input::-webkit-outer-spin-button,
+.cart-input-group input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Ẩn mũi tên cho Firefox */
+.cart-input-group input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.cart-input-group input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.cart-input-group button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background-color: var(--primary-900);
+    cursor: pointer;
+}
+
+.cart-input-group button:disabled {
+    background-color: var(--gray-400);
+    cursor: no-drop;
+}
+
+.button-cart-remove {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background-color: var(--error-500);
+    cursor: pointer;
+}
+
+.cart-input-group.loading input,
+.cart-input-group.loading button {
+    cursor: not-allowed;
+    opacity: 0.65;
+}

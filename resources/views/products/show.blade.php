@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', $product->name)
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/components/product-card.css') }}">
 @endpush

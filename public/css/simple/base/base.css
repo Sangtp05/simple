@@ -123,6 +123,23 @@
     background-color: var(--primary-800);
 }
 
+.has-items {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    background-color: var(--danger-500);
+    border-radius: 8px;
+    font-size: var(--text-sm);
+    color: var(--primary-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
 
 
 .footer {

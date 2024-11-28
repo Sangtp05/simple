@@ -8,7 +8,7 @@ use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\Customer\ProfileController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Customer\OrderController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', [HomepageController::class, 'index'])->name('homepage.index');
 
@@ -21,7 +21,6 @@ Route::get('/product/{categoryParent}/{categoryChild}/{slug}', [ProductControlle
 Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register']);
 
-// Routes cho khách chưa đăng nhập
 Route::middleware('guest:customer')->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [LoginController::class, 'login'])->name('login.post');
@@ -29,14 +28,19 @@ Route::middleware('guest:customer')->group(function () {
     Route::post('/register', [RegisterController::class, 'register'])->name('customer.register.post');
 });
 
-// Routes cho khách đã đăng nhập
 Route::middleware('auth:customer')->group(function () {
+    Route::get('/check-auth', [ProfileController::class, 'check'])->name('customer.checkAuth');
     Route::get('/profile', [ProfileController::class, 'show'])->name('customer.profile');
     Route::put('/profile', [ProfileController::class, 'update'])->name('customer.profile.update');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-    Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
-    Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
+    Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
+    Route::get('/cart/checkout', [OrderController::class, 'checkout'])->name('checkout.index');
+    Route::post('/cart/checkout', [OrderController::class, 'store'])->name('checkout.store');
     Route::get('/orders', [OrderController::class, 'index'])->name('customer.orders');
     Route::get('/orders/{order}', [OrderController::class, 'show'])->name('customer.orders.show');
+});
+
+Route::middleware('auth:customer')->group(function () {
+    Route::get('/api/cart', [CartController::class, 'get'])->name('cart.get');
+    Route::post('/api/cart/update', [CartController::class, 'update'])->name('cart.update');
 });

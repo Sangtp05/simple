@@ -26,4 +26,11 @@ class ProfileController extends Controller
 
         return redirect()->back()->with('success', 'Thông tin đã được cập nhật thành công!');
     }
+
+    public function check()
+    {
+        return response()->json([
+            'authenticated' => auth()->guard('customer')->check()
+        ]);
+    }
 }
