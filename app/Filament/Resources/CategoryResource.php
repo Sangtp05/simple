@@ -15,7 +15,7 @@ class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    protected static ?string $navigationLabel = 'Danh mục';
     public static function form(Form $form): Form
     {
         return $form
@@ -26,7 +26,8 @@ class CategoryResource extends Resource
                             ->required()
                             ->maxLength(255)
                             ->live(onBlur: true)
-                            ->afterStateUpdated(fn (string $state, Forms\Set $set) => 
+                            ->afterStateUpdated(
+                                fn(string $state, Forms\Set $set) =>
                                 $set('slug', Str::slug($state))
                             ),
 
@@ -114,6 +115,6 @@ class CategoryResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Shop';
+        return 'Sản phẩm';
     }
 }

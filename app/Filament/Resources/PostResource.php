@@ -137,7 +137,7 @@ class PostResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Content Management';
+        return 'Quản lý nội dung';
     }
 
     protected static ?string $navigationLabel = 'Bài viết';

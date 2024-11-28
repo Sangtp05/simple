@@ -18,6 +18,7 @@ class ProductImageResource extends Resource
     protected static ?string $model = ProductImage::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = 'Hình ảnh sản phẩm';
 
     public static function form(Form $form): Form
     {
@@ -80,6 +81,6 @@ class ProductImageResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Product';
+        return 'Sản phẩm';
     }
 }

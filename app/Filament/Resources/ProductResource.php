@@ -18,6 +18,7 @@ class ProductResource extends Resource
     protected static ?string $model = Product::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = 'Sản phẩm';
 
     public static function form(Form $form): Form
     {
@@ -103,6 +104,6 @@ class ProductResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Product';
+        return 'Sản phẩm';
     }
 }

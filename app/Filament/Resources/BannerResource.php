@@ -65,6 +65,6 @@ class BannerResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Homepage';
+        return 'Trang chủ';
     }
 }
