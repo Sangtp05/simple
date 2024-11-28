@@ -1,99 +1,71 @@
 @extends('layouts.app')
-@section('title', 'Chi tiết đơn hàng #' . $order->order_number)
+@section('title', 'Chi tiết đơn hàng #' . $order->id)
 
 @section('content')
-<div class="container py-8">
-    <div class="mb-6">
-        <a href="{{ route('customer.orders') }}" class="text-blue-600 hover:text-blue-900">
-            &larr; Quay lại danh sách đơn hàng
-        </a>
-    </div>
-
-    <div class="bg-white rounded-lg shadow overflow-hidden">
-        <div class="px-6 py-4 border-b border-gray-200">
-            <div class="flex justify-between items-center">
-                <h1 class="text-2xl font-bold">
-                    Đơn hàng #{{ $order->order_number }}
+<div class="container py-5">
+    <div class="card mb-4">
+        <div class="card-header border-bottom">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1 class="h3 mb-0">
+                    Đơn hàng #{{ $order->id }}
                 </h1>
-                <span class="px-3 py-1 rounded-full text-sm font-semibold
-                    {{ $order->status === 'completed' ? 'bg-green-100 text-green-800' : 
-                       ($order->status === 'cancelled' ? 'bg-red-100 text-red-800' : 
-                       'bg-yellow-100 text-yellow-800') }}">
+                <span class="badge rounded-pill 
+                    {{ $order->status === 'completed' ? 'bg-success' : 
+                       ($order->status === 'cancelled' ? 'bg-danger' : 
+                       'bg-warning') }}">
                     {{ trans('orders.status.' . $order->status) }}
                 </span>
             </div>
-            <div class="mt-2 text-sm text-gray-600">
+            <div class="text-muted small mt-2">
                 Đặt ngày: {{ $order->created_at->format('d/m/Y H:i') }}
             </div>
         </div>
 
-        <div class="px-6 py-4">
-            <h2 class="text-lg font-semibold mb-4">Thông tin giao hàng</h2>
-            <div class="text-gray-600">
-                <p>Địa chỉ: {{ $order->shipping_address }}</p>
-            </div>
-        </div>
+        <div class="card-body">
+            <h2 class="h5 mb-3">Thông tin giao hàng</h2>
+            <p class="text-muted mb-4">
+                Địa chỉ: {{ $order->shipping_address }}
+            </p>
 
-        <div class="px-6 py-4">
-            <h2 class="text-lg font-semibold mb-4">Chi tiết đơn hàng</h2>
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
-                    <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                            Sản phẩm
-                        </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                            Giá
-                        </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                            Số lượng
-                        </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                            Tổng
-                        </th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    @foreach($order->orderItems as $item)
-                    <tr>
-                        <td class="px-6 py-4">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 h-10 w-10">
-                                    <img class="h-10 w-10 rounded-full" 
-                                         src="{{ $item->product->image_url }}" 
-                                         alt="{{ $item->product->name }}">
-                                </div>
-                                <div class="ml-4">
-                                    <div class="text-sm font-medium text-gray-900">
-                                        {{ $item->product->name }}
+            <h2 class="h5 mb-3">Chi tiết đơn hàng</h2>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="bg-light">
+                        <tr>
+                            <th scope="col">Sản phẩm</th>
+                            <th scope="col">Giá</th>
+                            <th scope="col">Số lượng</th>
+                            <th scope="col" class="text-end">Tổng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($order->orderItems as $item)
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <img src="{{ $item->product->image_url }}" 
+                                         alt="{{ $item->product->name }}"
+                                         class="rounded me-3"
+                                         style="width: 48px; height: 48px; object-fit: cover;"
+                                         onerror="this.src = `{{ asset('img/pages/product/default.jpg') }}`">
+                                    <div>
+                                        <h6 class="mb-0">{{ $item->product->name }}</h6>
                                     </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900">
-                                {{ number_format($item->price) }}đ
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900">
-                                {{ $item->quantity }}
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900">
-                                {{ number_format($item->price * $item->quantity) }}đ
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                            </td>
+                            <td>{{ number_format($item->price) }}đ</td>
+                            <td>{{ $item->quantity }}</td>
+                            <td class="text-end">{{ number_format($item->price * $item->quantity) }}đ</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
-            <div class="mt-6 text-right">
-                <div class="text-lg font-bold">
+            <div class="text-end mt-4">
+                <h5 class="mb-0">
                     Tổng cộng: {{ number_format($order->total_amount) }}đ
-                </div>
+                </h5>
             </div>
         </div>
     </div>

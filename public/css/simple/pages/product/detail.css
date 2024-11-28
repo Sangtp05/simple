@@ -1,0 +1,126 @@
+.product-gallery {
+    margin-bottom: 30px;
+}
+
+.gallery-main .gallery-item {
+    aspect-ratio: 1/1;
+}
+
+.gallery-main .main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.gallery-main {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.gallery-main .slick-dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.gallery-main .slick-dots li button {
+    width: 36px;
+    height: 8px;
+    border-radius: 2px;
+    border: 0;
+    background-color: #7c7c7ca8;
+    font-size: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+.gallery-main .slick-dots li.slick-active button {
+    background-color: #fff;
+}
+
+.sale-price {
+    font-size: 32px;
+    font-weight: 600;
+    color: #ff4500;
+}
+
+.price {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--primary-900);
+}
+
+.original-price {
+    text-decoration: line-through;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+}
+
+.cart-input-group {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.button-cart {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    background-color: var(--primary-900);
+}
+
+.input-quantity {
+    width: 60px;
+    height: 40px;
+    text-align: center;
+    border: none;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+.input-quantity::-webkit-inner-spin-button,
+.input-quantity::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.btn.add-to-cart-detail {
+    width: 100%;
+    font-weight: 600;
+}
+
+.btn.add-to-cart:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.product-actions {
+    display: flex;
+    gap: 16px;
+}
+
+.add-to-cart-login, .add-to-cart-detail {
+    height: 40px;
+}
+
+.policy-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}

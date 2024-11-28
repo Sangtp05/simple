@@ -37,7 +37,7 @@ $categories = \App\Models\Category::with('children')
                 <div class="item_auth">
                     <a href="/cart" class="position-relative">
                         <img src="{{ asset('img/icons/cart.svg') }}" alt="Giỏ hàng">
-                        <span id="has-items">12</span>
+                        <span id="cart-icon-count"></span>
                     </a>
                 </div>
                 <div class="item_auth">

@@ -1,13 +1,7 @@
 $(document).ready(function () {
-    // Get routes from data attributes
-    const cartContent = document.getElementById("cart-content");
-    const CART_GET_URL = cartContent.dataset.getUrl;
-    const CART_UPDATE_URL = cartContent.dataset.updateUrl;
-    const CSRF_TOKEN = cartContent.dataset.token;
-
     function loadCart() {
         $.ajax({
-            url: CART_GET_URL,
+            url: url_get_cart,
             method: "GET",
             success: function (response) {
                 console.log(response);
@@ -21,6 +15,7 @@ $(document).ready(function () {
                     // Add cart items
                     response.carts.forEach((cart) => {
                         const urlImage = `/storage/${cart.product.primary_image.image}`;
+                        const defaultImage = "/img/pages/product/default.jpg";
                         const tr = document.createElement("tr");
                         tr.innerHTML = `
                         <td class="cart-col-product-image">
@@ -28,7 +23,7 @@ $(document).ready(function () {
                                 <img src="${urlImage}" 
                                      alt="${cart.product.name}"
                                      class="img-thumbnail me-3"
-                                     >
+                                     onerror="this.src = '${defaultImage}'">
                             </div>
                         </td>
                         <td class="product-price" data-price="${cart.price}">
@@ -96,10 +91,10 @@ $(document).ready(function () {
         inputGroup.find('input, button').prop('disabled', true);
         
         $.ajax({
-            url: CART_UPDATE_URL,
+            url: url_update_cart,
             method: "POST",
             data: {
-                _token: CSRF_TOKEN,
+                _token: csrf_token,
                 product_id: productId,
                 quantity: quantity,
             },

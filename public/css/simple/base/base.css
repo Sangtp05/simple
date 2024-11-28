@@ -129,8 +129,7 @@
     right: -8px;
     min-width: 16px;
     height: 16px;
-    padding: 0 4px;
-    background-color: var(--danger-500);
+    background-color: var(--error-500);
     border-radius: 8px;
     font-size: var(--text-sm);
     color: var(--primary-100);
@@ -139,8 +138,6 @@
     justify-content: center;
     z-index: 10;
 }
-
-
 
 .footer {
     background-color: var(--primary-900);

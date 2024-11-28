@@ -38,3 +38,42 @@
 .special-category-item-title {
     font-size: 48px;
 }
+
+.image-slider {
+    position: relative;
+}
+
+.image-slider .slick-prev,
+.image-slider .slick-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.image-slider .slick-prev {
+    left: -60px;
+} 
+
+.image-slider .slick-next {
+    right: -60px;
+}
+
+.slider-item {
+    padding: 0 10px;
+}
+
+.image-slider {
+    margin: 0 -10px;
+    margin-bottom: 50px;
+}
+
+.slider-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.slider-item img:hover {
+    transform: scale(1.05);
+}

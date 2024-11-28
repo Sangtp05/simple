@@ -9,7 +9,7 @@
     height: 20px;
 }
 
-.vertical-product-card .add-to-cart {
+.vertical-product-card .add-to-cart, .vertical-product-card .btn-login {
     display: flex;
     align-items: center;
     justify-content: center;

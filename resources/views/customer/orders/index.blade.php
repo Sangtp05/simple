@@ -2,75 +2,72 @@
 @section('title', 'Đơn hàng của tôi')
 
 @section('content')
-<div class="container py-8">
-    <h1 class="text-2xl font-bold mb-6">Đơn hàng của tôi</h1>
+<div class="container py-5">
+    <h1 class="h2 mb-4">Đơn hàng của tôi</h1>
 
     @if($orders->count() > 0)
-        <div class="bg-white rounded-lg shadow overflow-hidden">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
-                    <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                            Mã đơn hàng
-                        </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                            Ngày đặt
-                        </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                            Tổng tiền
-                        </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                            Trạng thái
-                        </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                        </th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    @foreach($orders as $order)
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm font-medium text-gray-900">
-                                #{{ $order->order_number }}
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900">
-                                {{ $order->created_at->format('d/m/Y H:i') }}
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900">
-                                {{ number_format($order->total_amount) }}đ
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                                {{ $order->status === 'completed' ? 'bg-green-100 text-green-800' : 
-                                   ($order->status === 'cancelled' ? 'bg-red-100 text-red-800' : 
-                                   'bg-yellow-100 text-yellow-800') }}">
-                                {{ trans('orders.status.' . $order->status) }}
-                            </span>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <a href="{{ route('customer.orders.show', $order) }}" 
-                               class="text-blue-600 hover:text-blue-900">
-                                Chi tiết
-                            </a>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+    <div class="card">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="bg-light">
+                        <tr>
+                            <th scope="col">Mã đơn hàng</th>
+                            <th scope="col">Ngày đặt</th>
+                            <th scope="col">Tổng tiền</th>
+                            <th scope="col">Trạng thái</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($orders as $order)
+                        <tr>
+                            <td>
+                                <span class="fw-medium">#{{ $order->id }}</span>
+                            </td>
+                            <td>{{ $order->created_at->format('d/m/Y H:i') }}</td>
+                            <td>{{ number_format($order->total_amount) }}đ</td>
+                            <td>
+                                <span class="badge rounded-pill 
+                                        {{ $order->status === 'completed' ? 'bg-success' : 
+                                           ($order->status === 'cancelled' ? 'bg-danger' : 
+                                           'bg-warning') }}">
+                                    {{ trans('orders.status.' . $order->status) }}
+                                </span>
+                            </td>
+                            <td class="text-end">
+                                <a href="{{ route('customer.orders.show', $order) }}"
+                                    class="btn btn-sm btn-outline-primary">
+                                    Chi tiết
+                                </a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
+    </div>
 
-        <div class="mt-4">
-            {{ $orders->links() }}
-        </div>
+    <div class="mt-4">
+        {{ $orders->links() }}
+    </div>
     @else
-        <div class="text-center py-8">
-            <p class="text-gray-500 mb-4">Bạn chưa có đơn hàng nào</p>
+    <div class="text-center py-5">
+        <div class="mb-4">
+            <img src="{{ asset('img/icons/empty-order.svg') }}"
+                alt="Không có đơn hàng"
+                class="img-fluid">
         </div>
+        <p class="text-muted">Bạn chưa có đơn hàng nào</p>
+        <a href="{{ route('homepage') }}" class="btn btn-primary mt-3">
+            Mua sắm ngay
+        </a>
+    </div>
     @endif
 </div>
-@endsection 
+
+<section class="section">
+    @include('homepage.partials.featured-products', ['featuredProducts' => $featuredProducts])
+</section>
+@endsection

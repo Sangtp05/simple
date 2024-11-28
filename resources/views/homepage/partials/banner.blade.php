@@ -7,16 +7,17 @@
     <div class="carousel-inner">
         @foreach ($banners as $banner)
             <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                <img class="d-block w-100" src="{{ Storage::url($banner->image) }}" alt="{{ $banner->url }}">
+                <img class="d-block w-100" src="{{ Storage::url($banner->image) }}" alt="{{ $banner->url }}"
+                    loading="lazy"
+                    onerror="this.src=`{{ asset('img/pages/banner/default.jpg') }}`"
+                >
             </div>
         @endforeach
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
+        <div><img src="{{ asset('img/icons/left-slide.svg') }}" alt="left-slide"></div>
     </a>
     <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
+        <div><img src="{{ asset('img/icons/right-slide.svg') }}" alt="right-slide"></div>
     </a>
 </div>

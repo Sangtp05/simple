@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Cart;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Services\BreadcrumbService;
+
 class OrderController extends Controller
 {
     protected $breadcrumbService;
@@ -42,17 +44,17 @@ class OrderController extends Controller
 
         try {
             DB::beginTransaction();
-            
+
             $cartItems = Cart::where('customer_id', auth()->guard('customer')->id())
                 ->with('product')
                 ->get();
-                
+
             if ($cartItems->isEmpty()) {
                 return redirect()->route('cart.show')->with('error', 'Giỏ hàng trống');
             }
 
             $order = Order::createFromCart($cartItems, $request->all());
-            
+
             Cart::deleteCart();
 
             DB::commit();
@@ -70,17 +72,20 @@ class OrderController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
-        return view('customer.orders.index', compact('orders'));
+        $this->breadcrumbService->add('Danh sách đơn hàng');
+        $featuredProducts = Product::getFeaturedProducts();
+        return view('customer.orders.index', compact('orders', 'featuredProducts'));
     }
 
     public function show(Order $order)
     {
-        // Kiểm tra order có thuộc về customer hiện tại
         if ($order->customer_id !== auth()->guard('customer')->id()) {
             abort(403);
         }
 
         $order->load(['orderItems.product', 'customer']);
+        $this->breadcrumbService->add('Danh sách đơn hàng', route('customer.orders'));
+        $this->breadcrumbService->add('Chi tiết đơn hàng #' . $order->id);
 
         return view('customer.orders.show', compact('order'));
     }

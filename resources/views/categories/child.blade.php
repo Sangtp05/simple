@@ -12,7 +12,8 @@
 <section class="category-child-section">
     <div class="text-decoration-none category-child-wrapper">
         <img class="category-child-image" src="{{ Storage::url($categoryChild->image) }}"
-            alt="{{ $categoryChild->name }}">
+            alt="{{ $categoryChild->name }}"
+            onerror="this.src = `{{ asset('img/pages/banner/default.jpg') }}`">
         <div class="category-child-content">
             <h3 class="category-child-name">{{ $categoryChild->name }}</h3>
             <p class="category-child-description">{{ $categoryChild->description }}</p>

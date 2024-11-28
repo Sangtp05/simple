@@ -13,7 +13,8 @@
     <a href="{{ route('categories.child.show', [$categoryParent->slug, $child->slug]) }}"
         class="text-decoration-none category-child-wrapper">
         <img class="category-child-image" src="{{ Storage::url($child->image) }}"
-            alt="{{ $child->name }}">
+            alt="{{ $child->name }}"
+            onerror="this.src = `{{ asset('img/pages/banner/default.jpg') }}`">
         <div class="category-child-content">
             <h3 class="category-child-name">{{ $child->name }}</h3>
             <p class="category-child-description">{{ $child->description }}</p>

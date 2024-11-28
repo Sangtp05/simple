@@ -2,7 +2,9 @@
     <div class="position-relative">
         <img src="{{ Storage::url($product->images->first()->image) }}"
             class="card-img-top product-image"
-            alt="{{ $product->name }}">
+            alt="{{ $product->name }}"
+            loading="lazy"
+            onerror="this.src = `{{ asset('img/pages/product/default.jpg') }}`">
     </div>
     <div class="vertical-product-card-body d-flex flex-column">
         <h5 class="card-title product-title mb-1">
@@ -37,9 +39,15 @@
                 class="text-decoration-none text-white">
                 Xem chi tiết</a>
         </button>
+        @auth('customer')
         <button class="btn btn-primary add-to-cart"
             data-product-id="{{ $product->id }}">
-            <img src="{{ asset('img/icons/cart.svg') }}" alt="cart" class="icon_button">
-        </button>
+                <img src="{{ asset('img/icons/cart.svg') }}" alt="cart" class="icon_button">
+            </button>
+        @else
+        <a href="{{ route('login') }}" class="btn btn-primary btn-login">
+            <img src="{{ asset('img/icons/user.svg') }}" alt="cart" class="icon_button">
+        </a>
+        @endauth
     </div>
 </div>

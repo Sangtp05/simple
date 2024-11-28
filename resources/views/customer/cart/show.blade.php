@@ -3,22 +3,25 @@
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/simple/pages/customer/cart.css') }}">
 @endpush
+@push('scripts')
+<script>
+    const url_get_cart = "{{ route('cart.get') }}";
+    const url_update_cart = "{{ route('cart.update') }}";
+    const csrf_token = "{{ csrf_token() }}";
+</script>
+<script src="{{ asset('js/simple/pages/customer/cart.js') }}"></script>
+@endpush
 @section('content')
-<section class="section section-cart">
+<section class="section">
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <div id="cart-content"
-                    data-get-url="{{ route('cart.get') }}"
-                    data-update-url="{{ route('cart.update') }}"
-                    data-token="{{ csrf_token() }}">
+                <div id="cart-content">
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-<!-- Cart item template -->
 <template id="cart-template">
     <div class="table-responsive">
         <table class="table table-hover">
@@ -56,7 +59,3 @@
     </div>
 </template>
 @endsection
-
-@push('scripts')
-<script src="{{ asset('js/simple/pages/customer/cart.js') }}"></script>
-@endpush
