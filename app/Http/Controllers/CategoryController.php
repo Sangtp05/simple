@@ -42,6 +42,9 @@ class CategoryController extends Controller
         $categoryParent = Category::where('slug', $categoryParent)->first();
         $categoryChild = Category::where('slug', $categoryChild)->first();
         $products = Product::where('category_id', $categoryChild->id)->get();
+        $this->breadcrumbService->add($categoryParent->name, route('categories.parent.show', $categoryParent->slug));
+        $this->breadcrumbService->add($categoryChild->name);
+
         return view('categories.child', compact('categoryParent', 'categoryChild', 'products'));
     }
 

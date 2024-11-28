@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use Illuminate\Http\Request;
+use App\Services\BreadcrumbService;
 
 class ProductController extends Controller
 {
-    public function index()
+    protected $breadcrumbService;
+
+    public function __construct(BreadcrumbService $breadcrumbService)
     {
-        $products = Product::paginate(12);
-        return view('products.index', compact('products'));
+        $this->breadcrumbService = $breadcrumbService;
     }
 
     public function show($categoryParent, $categoryChild, $slug)
@@ -23,6 +24,13 @@ class ProductController extends Controller
             ->where('id', '!=', $product->id)
             ->limit(4)
             ->get();
+
+        $this->breadcrumbService->add($product->category->parent->name, route('categories.parent.show', $product->category->parent->slug));
+        $this->breadcrumbService->add($product->category->name, route('categories.child.show', [
+            'categoryParent' => $product->category->parent->slug,
+            'categoryChild' => $product->category->slug,
+        ]));
+        $this->breadcrumbService->add($product->name);
 
         return view('products.show', compact('product', 'relatedProducts'));
     }

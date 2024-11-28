@@ -1,26 +1,13 @@
 @extends('layouts.app')
-
+@push('styles')
+<link rel="stylesheet" href="{{ asset('css/components/product-card.css') }}">
+@endpush
+@push('scripts')
+<script src="{{ asset('js/components/product-card.js') }}"></script>
+@endpush
 @section('content')
 <div class="container py-5">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ url('/') }}">Trang chủ</a></li>
-            <li class="breadcrumb-item">
-                <a href="{{ route('categories.parent.show', $product->category->parent->slug) }}">
-                    {{ $product->category->parent->name }}
-                </a>
-            </li>
-            <li class="breadcrumb-item">
-                <a href="{{ route('categories.child.show', [$product->category->parent->slug, $product->category->slug]) }}">
-                    {{ $product->category->name }}
-                </a>
-            </li>
-            <li class="breadcrumb-item active">{{ $product->name }}</li>
-        </ol>
-    </nav>
-
     <div class="row">
-        <!-- Hình ảnh sản phẩm -->
         <div class="col-md-6">
             <div class="product-gallery">
                 <div class="main-image mb-3">
@@ -91,7 +78,6 @@
         </div>
     </div>
 
-    <!-- Chi tiết sản phẩm -->
     <div class="row mt-5">
         <div class="col-12">
             <ul class="nav nav-tabs" id="productTabs" role="tablist">
@@ -117,28 +103,13 @@
         </div>
     </div>
 
-    <!-- Sản phẩm liên quan -->
     @if($relatedProducts->count() > 0)
     <div class="related-products mt-5">
         <h3 class="mb-4">Sản phẩm liên quan</h3>
         <div class="row">
             @foreach($relatedProducts as $relatedProduct)
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="{{ $relatedProduct->image }}" class="card-img-top" alt="{{ $relatedProduct->name }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $relatedProduct->name }}</h5>
-                        <p class="card-text">{{ number_format($relatedProduct->price) }}đ</p>
-                        <a href="{{ route('products.show', [
-                            'categoryParent' => $relatedProduct->category->parent->slug,
-                            'categoryChild' => $relatedProduct->category->slug,
-                            'slug' => $relatedProduct->slug
-                        ]) }}"
-                            class="btn btn-outline-primary">
-                            Xem chi tiết
-                        </a>
-                    </div>
-                </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <x-product-card-vertical :product="$product" />
             </div>
             @endforeach
         </div>
