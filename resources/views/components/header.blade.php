@@ -148,11 +148,15 @@ $categories = \App\Models\Category::with('children')
                 </div>
                 @else
                 <div class="item_auth_btn">
-                    <a href="{{ route('login') }}" class="login_link auth_link">Đăng nhập</a>
+                    <a href="{{ route('login') }}" class="login_link auth_link">
+                        <span class="auth_link_text">Đăng nhập</span>
+                        <img src="{{ asset('img/icons/login.svg') }}" alt="Đăng nhập" class="auth_link_icon">
+                    </a>
                 </div>
                 <div class="item_auth_btn">
                     <a href="{{ route('customer.register') }}" class="register_link auth_link">
-                        Đăng ký
+                        <span class="auth_link_text">Đăng ký</span>
+                        <img src="{{ asset('img/icons/register.svg') }}" alt="Đăng ký" class="auth_link_icon">
                     </a>
                 </div>
                 @endauth

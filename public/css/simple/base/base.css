@@ -268,12 +268,22 @@
         z-index: 10;
     }
 
+    .auth_link_text {
+        display: none;
+    }
 
     /* Animation cho menu */
     .group_menu, .menu_search.d-md-none {
         display: none;
         transform: translateY(-20px);
         animation: slideDown 0.3s ease forwards;
+    }
+
+    .header_nav .login_link,
+    .header_nav .register_link {
+        padding: 12px 0;
+        background-color: transparent;
+        border: none;
     }
 
     @keyframes slideDown {
