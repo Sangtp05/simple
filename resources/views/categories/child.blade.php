@@ -5,9 +5,12 @@
 <link rel="stylesheet" href="{{ asset('css/components/product-card.css') }}">
 @endpush
 @push('scripts')
-<script src="{{ asset('js/components/product-card.js') }}"></script>
+<script>
+    const isAuthenticated = "{{ auth('customer')->check() ? 'true' : 'false' }}";
+    const categoryId = "{{ $categoryChild->id }}";
+</script>
+<script src="{{ asset('js/simple/pages/category/child.js') }}"></script>
 @endpush
-
 @section('content')
 <section class="category-child-section">
     <div class="text-decoration-none category-child-wrapper">
@@ -23,11 +26,38 @@
     <div class="section">
         <div class="container">
             <div class="row">
-                @foreach($products as $product)
-                <div class="col-lg-3 col-md-4 col-6 mb-4">
-                    <x-product-card-vertical :product="$product" />
+                <div class="col-lg-3">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">Bộ lọc</h5>
+                            
+                            <div class="mb-4">
+                                <h6 class="mb-2">Kích thước</h6>
+                                <div class="size-filters">
+                                    <!-- Size filters will be loaded here -->
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <h6 class="mb-2">Màu sắc</h6>
+                                <div class="color-filters">
+                                    <!-- Color filters will be loaded here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                @endforeach
+
+                <div class="col-lg-9">
+                    <div class="row product-list">
+                        <!-- Products will be loaded here -->
+                    </div>
+                    <div class="text-center loading-spinner d-none">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

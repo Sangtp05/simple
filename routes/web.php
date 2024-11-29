@@ -55,3 +55,7 @@ Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/policy', [PageController::class, 'policy'])->name('policy');
 
 Route::get('/search', [SearchController::class, 'index'])->name('search');
+
+
+Route::get('/api/categories/{category}/filters', [CategoryController::class, 'getFilters']);
+Route::get('/api/categories/{category}/products', [CategoryController::class, 'getProducts']); 
