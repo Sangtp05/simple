@@ -9,6 +9,8 @@ use App\Http\Controllers\Customer\ProfileController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\PageController;
 
 Route::get('/', [HomepageController::class, 'index'])->name('homepage.index');
 
@@ -44,3 +46,9 @@ Route::middleware('auth:customer')->group(function () {
     Route::get('/api/cart', [CartController::class, 'get'])->name('cart.get');
     Route::post('/api/cart/update', [CartController::class, 'update'])->name('cart.update');
 });
+
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+Route::get('/posts/{slug}', [PostController::class, 'show'])->name('posts.show');
+
+Route::get('/about', [PageController::class, 'about'])->name('about');
+Route::get('/policy', [PageController::class, 'policy'])->name('policy');

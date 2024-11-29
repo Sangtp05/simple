@@ -38,6 +38,13 @@ php artisan db:seed
 ```
 
 ## Cấu hình Storage
+1. Cấu hình APP_URL trong file .env:
+Nếu chạy local
+```bash
+APP_URL=http://127.0.0.1:8000
+```
+
+2. Tạo symbolic link:
 ```bash
 php artisan storage:link
 ```

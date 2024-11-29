@@ -24,7 +24,7 @@
         <div class="container">
             <div class="row">
                 @foreach($products as $product)
-                <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="col-lg-3 col-md-4 col-6 mb-4">
                     <x-product-card-vertical :product="$product" />
                 </div>
                 @endforeach

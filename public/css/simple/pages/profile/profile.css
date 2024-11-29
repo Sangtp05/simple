@@ -1,0 +1,79 @@
+.profile-card {
+    border: none;
+    box-shadow: 0 0 20px rgba(0,0,0,0.08);
+    border-radius: 12px;
+}
+
+.profile-card .card-header {
+    background-color: var(--primary-50);
+    border-bottom: 1px solid var(--primary-100);
+    padding: 1.5rem;
+}
+
+.profile-card .card-title {
+    color: var(--primary-900);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.profile-card .card-body {
+    padding: 2rem;
+}
+
+.profile-card .form-label {
+    font-weight: 500;
+    color: var(--gray-700);
+}
+
+.profile-card .form-control {
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border-color: var(--gray-200);
+}
+
+.profile-card .form-control:focus {
+    border-color: var(--primary-300);
+    box-shadow: 0 0 0 0.2rem rgba(var(--primary-rgb), 0.15);
+}
+
+.profile-card .form-control:disabled {
+    background-color: var(--gray-50);
+}
+
+.profile-card .btn-primary {
+    padding: 0.75rem;
+    font-weight: 500;
+}
+
+.profile-card .card-footer {
+    background-color: var(--gray-50);
+    border-top: 1px solid var(--gray-100);
+    padding: 1.5rem;
+}
+
+.profile-card .btn-outline-primary {
+    padding: 0.75rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.profile-card .btn-outline-primary:hover {
+    transform: translateY(-2px);
+}
+
+.profile-card .bi {
+    margin-right: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 767.98px) {
+    .profile-card .card-body {
+        padding: 1.5rem;
+    }
+    
+    .profile-card .card-footer .btn {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+    }
+} 

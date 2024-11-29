@@ -125,17 +125,19 @@
 </section>
 
 <section class="section">
-    @if($relatedProducts->count() > 0)
-    <div class="related-products mt-5">
-        <h3 class="mb-4">Sản phẩm liên quan</h3>
-        <div class="row">
-            @foreach($relatedProducts as $relatedProduct)
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <x-product-card-vertical :product="$product" />
+    <div class="container">
+        @if($relatedProducts->count() > 0)
+        <div class="related-products mt-5">
+            <h3 class="mb-4">Sản phẩm liên quan</h3>
+            <div class="row">
+                @foreach($relatedProducts as $relatedProduct)
+                <div class="col-lg-3 col-md-4 col-6 mb-4">
+                    <x-product-card-vertical :product="$relatedProduct" />
+                </div>
+                @endforeach
             </div>
-            @endforeach
         </div>
+        @endif
     </div>
-    @endif
 </section>
 @endsection

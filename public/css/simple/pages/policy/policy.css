@@ -1,0 +1,110 @@
+.policy-page {
+    padding: 2rem 0;
+}
+
+/* Header */
+.policy-header {
+    background-color: var(--primary-50);
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+}
+
+.policy-header h1 {
+    color: var(--primary-900);
+    font-weight: 600;
+}
+
+/* Sidebar Navigation */
+.policy-nav {
+    top: 2rem;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.policy-nav .nav-link {
+    color: var(--gray-700);
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.policy-nav .nav-link:hover {
+    background-color: var(--primary-50);
+    color: var(--primary-700);
+}
+
+.policy-nav .nav-link.active {
+    background-color: var(--primary-500);
+    color: white;
+}
+
+/* Content */
+.policy-tab-content {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.policy-tab-content h2 {
+    color: var(--primary-900);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.policy-tab-content h3 {
+    color: var(--primary-700);
+    margin: 2rem 0 1rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.policy-tab-content p {
+    color: var(--gray-700);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.policy-tab-content ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.policy-tab-content ul li {
+    color: var(--gray-700);
+    margin-bottom: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 991.98px) {
+    .policy-nav {
+        margin-bottom: 2rem;
+        position: static !important;
+    }
+
+    .policy-nav .nav-pills {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 1rem;
+    }
+
+    .policy-nav .nav-link {
+        white-space: nowrap;
+        margin-right: 0.5rem;
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .policy-header {
+        padding: 2rem 0;
+    }
+
+    .policy-tab-content {
+        padding: 1.5rem;
+    }
+} 

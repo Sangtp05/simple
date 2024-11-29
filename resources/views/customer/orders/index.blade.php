@@ -1,6 +1,11 @@
 @extends('layouts.app')
 @section('title', 'Đơn hàng của tôi')
-
+@push('styles')
+<link rel="stylesheet" href="{{ asset('css/components/product-card.css') }}">
+@endpush
+@push('scripts')
+<script src="{{ asset('js/components/product-card.js') }}"></script>
+@endpush
 @section('content')
 <div class="container py-5">
     <h1 class="h2 mb-4">Đơn hàng của tôi</h1>
@@ -54,13 +59,14 @@
     </div>
     @else
     <div class="text-center py-5">
-        <div class="mb-4">
-            <img src="{{ asset('img/icons/empty-order.svg') }}"
+        <div class="mb-4 d-flex justify-content-center" >
+            <img src="{{ asset('img/pages/customer/order.svg') }}"
                 alt="Không có đơn hàng"
-                class="img-fluid">
+                class="img-fluid"
+                style="max-width: 200px;">
         </div>
         <p class="text-muted">Bạn chưa có đơn hàng nào</p>
-        <a href="{{ route('homepage') }}" class="btn btn-primary mt-3">
+        <a href="{{ route('homepage.index') }}" class="btn btn-primary mt-3">
             Mua sắm ngay
         </a>
     </div>

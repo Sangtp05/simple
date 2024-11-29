@@ -59,8 +59,8 @@ class PostResource extends Resource
                         Forms\Components\Select::make('type')
                             ->options([
                                 'post' => 'Post',
-                                'news' => 'News',
-                                'page' => 'Page',
+                                'fashion' => 'Fashion',
+                                'simple' => 'Simple',
                             ])
                             ->required()
                             ->default('post'),

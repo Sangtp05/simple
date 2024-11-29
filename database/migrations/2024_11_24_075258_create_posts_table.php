@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->longText('content');
             $table->string('image')->nullable();
-            $table->string('type')->default('post'); // hoặc enum('post', 'page', 'news')
+            $table->string('type')->default('post'); // hoặc enum('post', 'fashion', 'simple')
             $table->timestamps();
         });
     }
