@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\SearchController;
 
 Route::get('/', [HomepageController::class, 'index'])->name('homepage.index');
 
@@ -52,3 +53,5 @@ Route::get('/posts/{slug}', [PostController::class, 'show'])->name('posts.show')
 
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/policy', [PageController::class, 'policy'])->name('policy');
+
+Route::get('/search', [SearchController::class, 'index'])->name('search');
