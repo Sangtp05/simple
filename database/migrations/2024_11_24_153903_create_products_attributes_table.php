@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('product_attributes', function (Blueprint $table) {
             $table->id();
             $table->string('name'); // Size hoặc Color
-            $table->string('value'); // S, M, L hoặc Red, Blue
+            $table->string('value'); // S, M, L hoặc Red, Blue, white, black
             $table->unsignedBigInteger('product_id'); // chỉ tạo column, chưa liên kết
             $table->timestamps();
         });
