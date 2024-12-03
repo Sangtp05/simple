@@ -11,7 +11,7 @@
             <div class="col-lg-8 col-12">
                 <article>
                     @if($post->image)
-                    <img class="img-main" src="{{ asset($post->image) }}" alt="{{ $post->name }}"
+                    <img class="img-main" src="{{ Storage::url($post->image) }}" alt="{{ $post->name }}"
                         onerror="this.src=`{{ asset('img/pages/post/default.svg') }}`">
                     @endif
                     <h1 class="mb-4">{{ $post->name }}</h1>

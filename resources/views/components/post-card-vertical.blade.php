@@ -1,6 +1,6 @@
 <div class="card h-100 post-card" onclick="window.location=`{{ route('posts.show', $post->slug) }}`">
     <div class="position-relative">
-        <img src="{{ asset($post->image) }}"
+        <img src="{{ Storage::url($post->image) }}"
             alt="{{ $post->name }}"
             onerror="this.src=`{{ asset('img/pages/post/default.svg') }}`">
     </div>
