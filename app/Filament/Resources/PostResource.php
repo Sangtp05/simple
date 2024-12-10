@@ -87,8 +87,8 @@ class PostResource extends Resource
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'post' => 'primary',
-                        'news' => 'success',
-                        'page' => 'warning',
+                        'fashion' => 'success',
+                        'simple' => 'warning',
                     }),
                     
                 Tables\Columns\TextColumn::make('created_at')

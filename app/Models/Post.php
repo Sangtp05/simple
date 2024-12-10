@@ -24,8 +24,8 @@ class Post extends Model
     {
         return match ($this->type) {
             'post' => 'primary',
-            'news' => 'success',
-            'page' => 'warning',
+            'fashion' => 'success',
+            'simple' => 'warning',
             default => 'secondary',
         };
     }
